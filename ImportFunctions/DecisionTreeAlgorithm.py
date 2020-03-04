@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import random
 
 
 
@@ -307,7 +307,7 @@ def DecisionTreeAlgo(df,ml_task, counter=0, min_samples=2, max_depth=5, random_s
 
         # run helper functions
 
-        potential_splits = get_potential_splits(data)
+        potential_splits = get_potential_splits(data,random_subspace)
 
 
         #find lowest overall entropy
@@ -368,35 +368,36 @@ def DecisionTreeAlgo(df,ml_task, counter=0, min_samples=2, max_depth=5, random_s
 
 # In[102]:
 
-
+    
+    
+# 3. Make predictions
+# 3.1 One example
 def predict(example, tree):
     question = list(tree.keys())[0]
-
-    feature_name, comparison, value = question.split()
+    feature_name, comparison_operator, value = question.split(" ")
 
     # ask question
-
-    if comparison == "<=":
+    if comparison_operator == "<=":
         if example[feature_name] <= float(value):
             answer = tree[question][0]
         else:
             answer = tree[question][1]
-
+    
+    # feature is categorical
     else:
         if str(example[feature_name]) == value:
             answer = tree[question][0]
         else:
             answer = tree[question][1]
 
-
-
-    #base case
+    # base case
     if not isinstance(answer, dict):
-        return(answer)
+        return answer
+    
+    # recursive part
     else:
-
         residual_tree = answer
-        return predict(example,residual_tree)
+        return predict(example, residual_tree)
 
 
 # ## HYPYERPARAM TUNER
@@ -429,7 +430,11 @@ def calculate_adjr_squared(data,tree):
 
 
 # In[107]:
-
+    
+# 3.2 All examples of the test data
+def DecisionTreePredicitions(test_df, tree):
+    predictions = test_df.apply(predict, args=(tree,), axis=1)
+    return predictions
 
 
 
@@ -439,20 +444,21 @@ def gridsearch(train_df, val_df):
 	grid_search = {'max_depth':[], 'min_samples':[], 'adjusted_r_square_train':[], 'adjusted_r_sqaure_val':[]}
 
 	for max_depth in range(2,11):
-    	for min_samples in range(5, 30, 5):
+        for min_samples in range(5, 30, 5):
       		tree  = DecisionTreeAlgo(train_df,ml_task='regression',max_depth=max_depth, min_samples=min_samples)
 
-        	adjr_train = calculate_adjr_squared(train_df,tree)
-        	adjr_val = calculate_adjr_squared(val_df,tree)
+            	adjr_train = calculate_adjr_squared(train_df,tree)
+            	adjr_val = calculate_adjr_squared(val_df,tree)
+    
+            	grid_search['max_depth'].append(max_depth)
+            	grid_search['min_samples'].append(min_samples)
+    
+    
+            	grid_search['adjusted_r_square_train'].append(adjr_train)
+            	grid_search['adjusted_r_sqaure_val'].append(adjr_val)
+    
 
-        	grid_search['max_depth'].append(max_depth)
-        	grid_search['min_samples'].append(min_samples)
+    grid_search = pd.DataFrame(grid_search)
+    return grid_search.sort_values('adjusted_r_sqaure_val',ascending=False)
 
-
-        	grid_search['adjusted_r_square_train'].append(adjr_train)
-        	grid_search['adjusted_r_sqaure_val'].append(adjr_val)
-
-
-	grid_search = pd.DataFrame(grid_search)
-	return grid_search.sort_values('adjusted_r_sqaure_val',ascending=False)
 '''
