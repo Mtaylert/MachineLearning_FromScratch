@@ -1,0 +1,14 @@
+name: MachineLearningFromScratch
+
+chanels:
+- anaconda
+- default
+- mtaylert
+
+dependencies:
+- numpy
+- pandas
+- seaborn
+- matplotlib
+- sklearn
+- random 
