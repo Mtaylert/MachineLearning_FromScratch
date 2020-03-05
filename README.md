@@ -1,33 +1,30 @@
 # MachineLearning_FromScratch
-This is a repository for generating all ML models from scratch using numpy and pandas. The goal is to outline both classifiers and
-and regressors for the following models:
-
-- Linear [X]
-- Decision Tree [X]
-- Random Forest [X]
-- Support Vector Machines
-- Gradient Boosted Trees 
-- Naive Bayes
-- K-Nearest Neightbors
-- Markov Chain
+This is a repository for generating statistical modeling approaches from scratch using numpy and pandas. Below is the list of what is/will be included within the repository.
 
  
-### Solar System Exploration, 1950s – 1960s 
+### Supervised Learning Algos
 
-- [ ] Mercury
+- [x] Linear Regression
 
-- [x] Venus
+- [x] Logistic Regression
 
-- [x] Earth (Orbit/Moon) 
+- [x] Decision Trees Classifier
 
-- [x] Mars 
+- [x] Decision Trees Regressor
 
-- [ ] Jupiter 
+- [x] Random Forest Classifier
 
-- [ ] Saturn 
+- [x] Random Forest Regressor
 
-- [ ] Uranus 
+- [x] Leave One Out Cross Validation (LOOCV)
 
-- [ ] Neptune 
+- [x] K-Fold Cross Validation
 
-- [ ] Comet Haley
+- [ ] Support Vector Machine Classifier  
+
+- [ ] Support Vector Machine Regressor 
+
+- [ ] Gradient Boosted Trees Classifier 
+
+- [ ] Gradient Boosted Trees Regressor 
+
