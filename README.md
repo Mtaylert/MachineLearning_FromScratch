@@ -5,7 +5,7 @@ This is a repository for generating statistical modeling approaches from scratch
  
 ### Supervised Learning Algos
 
-- [x] [x] Linear Regression
+- [x] Linear Regression [x]
 
 - [x] Logistic Regression
 
