@@ -5,13 +5,13 @@ This is a repository for generating statistical modeling approaches from scratch
  
 ### Supervised Learning Algos
 
-- [x] Linear Regression [x]
+- [x] Linear Regression 
 
 - [x] Logistic Regression
 
-- [x] [x]  Decision Trees Classifier
+- [x] Decision Trees Classifier
 
-- [x] [x] Decision Trees Regressor
+- [x] Decision Trees Regressor
 
 - [x] Random Forest Classifier
 
