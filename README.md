@@ -21,6 +21,8 @@ This is a repository for generating statistical modeling approaches from scratch
 
 - [x] K-Fold Cross Validation
 
+- [x] Lasso, Ridge, and Elastic-Net Regression
+
 - [ ] Support Vector Machine Classifier  
 
 - [ ] Support Vector Machine Regressor 
